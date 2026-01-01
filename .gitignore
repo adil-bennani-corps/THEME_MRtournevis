@@ -1,0 +1,28 @@
+# Fichiers temporaires
+*.tmp
+*.temp
+*~
+
+# Fichiers de sauvegarde
+*.backup
+*.bak
+*.old
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers d'éditeur
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de documentation Markdown (optionnel - peut être ignoré si on veut les garder)
+# *.md
+
+# Fichiers de problème/debug
+*.probleme
+index.json.probleme
+

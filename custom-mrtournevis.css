@@ -1,0 +1,787 @@
+/* ============================================
+   Design System - Mr. Tournevis
+   ============================================ */
+
+/* Variables CSS Custom */
+:root {
+  --color-primary: #DC2626; /* Rouge actuel à garder */
+  --color-primary-hover: #B91C1C;
+  --color-secondary: #1F2937;
+  --color-accent: #F59E0B;
+  --color-text: #111827;
+  --color-text-light: #6B7280;
+  --color-bg: #FFFFFF;
+  --color-bg-light: #F9FAFB;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Typographie - Import Google Fonts Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================
+   Composants réutilisables
+   ============================================ */
+
+/* Boutons */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-large {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+
+.btn-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Cards */
+.activity-card,
+.service-card,
+.testimonial-card,
+.location-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover,
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--color-bg-light);
+  color: var(--color-text);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: 16px 0;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Section Services Hero
+   ============================================ */
+
+.services-hero {
+  padding: 80px 0;
+  background: var(--color-bg-light);
+}
+
+.services-hero .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.services-hero h1 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.services-hero .lead {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.services-hero p {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.services-hero-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+  .services-hero {
+    padding: 40px 0;
+  }
+  
+  .services-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .services-hero .lead {
+    font-size: 1.125rem;
+  }
+}
+
+/* ============================================
+   Section Services Grid
+   ============================================ */
+
+.services-grid {
+  padding: 80px 0;
+  background: white;
+}
+
+.services-grid .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.services-grid h2 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.service-card {
+  text-align: center;
+}
+
+.service-card img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 24px;
+  border-radius: 8px;
+}
+
+.service-card h3 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.service-card .divider {
+  margin: 16px auto;
+}
+
+.service-card p {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    padding: 40px 0;
+  }
+  
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ============================================
+   Section CTA Appointment
+   ============================================ */
+
+.cta-appointment {
+  padding: 80px 0;
+  background: var(--color-primary);
+  color: white;
+}
+
+.cta-appointment .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cta-appointment h2 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: white;
+  margin-bottom: 32px;
+}
+
+.cta-appointment .btn-primary {
+  background: white;
+  color: var(--color-primary);
+}
+
+.cta-appointment .btn-primary:hover {
+  background: var(--color-bg-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+  .cta-appointment {
+    padding: 40px 0;
+  }
+  
+  .cta-appointment h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   Section Testimonials
+   ============================================ */
+
+.testimonials {
+  padding: 80px 0;
+  background: var(--color-bg-light);
+}
+
+.testimonials .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonials h2 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.testimonials-slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.testimonial-card {
+  background: white;
+}
+
+.testimonial-card .stars {
+  color: #F59E0B;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.testimonial-text {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-author img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-author strong {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 40px 0;
+  }
+  
+  .testimonials-slider {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Section Locations
+   ============================================ */
+
+.locations {
+  padding: 80px 0;
+  background: white;
+}
+
+.locations .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.locations h2 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.location-card h3 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.location-card .address {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.location-card .contact {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.location-card .contact a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.location-card .contact a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .locations {
+    padding: 40px 0;
+  }
+  
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Section Homepage Activities
+   ============================================ */
+
+.homepage-activities {
+  padding: 80px 0;
+  background: white;
+}
+
+.homepage-activities .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.homepage-activities h2 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+}
+
+.activity-card {
+  background: white;
+}
+
+.activity-card .card-icon {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.activity-card h3 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.activity-card .services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.activity-card .services-list li {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.activity-card .services-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .homepage-activities {
+    padding: 40px 0;
+  }
+  
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Section Hero Dual (Homepage)
+   ============================================ */
+
+.hero-dual {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, white 100%);
+}
+
+.hero-dual .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin-bottom: 32px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-cta-group .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 990px) {
+  .hero-dual .container {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-dual {
+    padding: 40px 0;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ============================================
+   Section Appointment Form
+   ============================================ */
+
+.appointment-page {
+  padding: 80px 0;
+  background: white;
+}
+
+.appointment-page .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.appointment-page h1 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.appointment-page .lead {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin-bottom: 48px;
+}
+
+.appointment-form {
+  background: var(--color-bg-light);
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: white;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.appointment-form .btn-primary {
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .appointment-page {
+    padding: 40px 0;
+  }
+  
+  .appointment-page h1 {
+    font-size: 2rem;
+  }
+  
+  .appointment-form {
+    padding: 24px;
+  }
+}
+
+/* ============================================
+   Navigation - Mise en avant Services
+   ============================================ */
+
+/* Mise en avant du lien "Services de réparation" dans le menu */
+.header__menu-item[href*="/pages/services"],
+.header__menu-item[href*="/services"] {
+  font-weight: 600;
+  color: var(--color-primary) !important;
+  position: relative;
+}
+
+.header__menu-item[href*="/pages/services"]:after,
+.header__menu-item[href*="/services"]:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 1px;
+}
+
+.header__menu-item[href*="/pages/services"]:hover,
+.header__menu-item[href*="/services"]:hover {
+  color: var(--color-primary-hover) !important;
+}
+
+/* Badge "Nouveau" optionnel pour Services (à ajouter via CSS si besoin) */
+.nav-highlight {
+  position: relative;
+}
+
+.nav-highlight::before {
+  content: 'Nouveau';
+  position: absolute;
+  top: -8px;
+  right: -40px;
+  background: var(--color-accent);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 990px) {
+  .nav-highlight::before {
+    display: none;
+  }
+}
+

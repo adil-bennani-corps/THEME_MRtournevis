@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "services_hero": {
+      "type": "services-hero",
+      "settings": {
+        "heading": "Réparation rapide et abordable de smartphones, tablettes, ordinateurs et consoles de jeux",
+        "lead_text": "Nous pouvons vous assurer que nous avons tout vu ! Des smartphones écrasés par une voiture aux tablettes qui ont plongé dans une piscine, nous sommes prêts à affronter tout ce qui se présente à nous.",
+        "description": "<p>Chez <strong>Mr. Tournevis</strong>, chaque technicien a une spécialité, et nous maintenons un environnement d'apprentissage constant, de sorte qu'aucun appareil n'est trop nouveau, aucune technologie trop compliquée.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "services_grid": {
+      "type": "services-grid",
+      "blocks": {
+        "service_smartphones": {
+          "type": "service",
+          "settings": {
+            "title": "Smartphones",
+            "description": "Des écrans iPhone fissurés aux batteries Galaxy défectueuses, nos techniciens sont capables de résoudre presque tous les problèmes avec votre téléphone portable."
+          }
+        },
+        "service_tablettes": {
+          "type": "service",
+          "settings": {
+            "title": "Tablettes",
+            "description": "Vous avez un écran cassé ou une prise casque défectueuse ? Quel que soit votre problème, nous pouvons vous aider, la plupart des travaux prennent moins d'une heure !"
+          }
+        },
+        "service_ordinateurs": {
+          "type": "service",
+          "settings": {
+            "title": "Ordinateurs",
+            "description": "Que vous utilisiez un MacBook Pro, le dernier Dell XPS ou un ancien Lenovo qui a connu des jours meilleurs, nous pouvons vous remettre sur la bonne voie."
+          }
+        },
+        "service_consoles": {
+          "type": "service",
+          "settings": {
+            "title": "Console de jeux",
+            "description": "Votre console Nintendo Switch ne charge plus, l'écran n'affiche plus rien. Nous vous proposons un diagnostic gratuit afin d'évaluer la panne et nos techniciens effectuent la réparation dans les meilleurs délais et au meilleur prix garanti."
+          }
+        }
+      },
+      "block_order": [
+        "service_smartphones",
+        "service_tablettes",
+        "service_ordinateurs",
+        "service_consoles"
+      ],
+      "settings": {
+        "title": "Nos services de réparation",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "services_cta": {
+      "type": "services-cta-appointment",
+      "settings": {
+        "title": "Besoin d'une intervention à domicile ?",
+        "button_label": "Planifier un rendez-vous",
+        "button_link": "/pages/appointment",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "services_testimonials": {
+      "type": "services-testimonials",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Je recommande vivement ce magasin. Service et personnels au top! Travail très bien et très professionnel à des prix abordables. Et sont extrêmement chaleureux avec la clientèle 👌🏻",
+            "author": "Sam V."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Milles mercis à toute l'équipe 🤝 super pro! Très très patient!! Moi qui est difficile ils m'ont tout de suite trouvé ce que je désirais. Super gentil hyper chaleureux et que ce soit en réparation ou achats je vais les yeux fermés 🙏",
+            "author": "Kamelia A."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Je recommande ce magasin les yeux fermés! J'ai appelé à 18h00 pour une réparation de mon écran iPhone 11 complètement cassé. Prise en charge rapide et réparation en moins de 30 minutes! Vous recevez même une protection et une garantie sur votre écran. Une adresse à retenir à Bruxelles ! :)",
+            "author": "Sana K."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {
+        "title": "Ce que disent nos clients",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "services_locations": {
+      "type": "services-locations",
+      "blocks": {
+        "location_1": {
+          "type": "location",
+          "settings": {
+            "name": "Bruxelles - Forest",
+            "address": "Rue de Formanoir 8\n1070 Bruxelles\nBelgique",
+            "phone": "+32 (483)69.43.28",
+            "email": "info@mrtournevis.be"
+          }
+        },
+        "location_2": {
+          "type": "location",
+          "settings": {
+            "name": "Anderlecht",
+            "address": "Rue Scheutveld 44\n1070 Anderlecht\nBelgique",
+            "phone": "+32 (483)69.43.28",
+            "email": "info@mrtournevis.be"
+          }
+        }
+      },
+      "block_order": [
+        "location_1",
+        "location_2"
+      ],
+      "settings": {
+        "title": "Nos magasins",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "services_hero",
+    "services_grid",
+    "services_cta",
+    "services_testimonials",
+    "services_locations"
+  ]
+}
+

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "appointment_form": {
+      "type": "appointment-form",
+      "settings": {
+        "title": "Prendre rendez-vous",
+        "description": "Vous avez besoin d'une intervention à domicile ? Remplissez le formulaire ci-dessous et nous vous recontacterons rapidement.",
+        "button_label": "Envoyer la demande",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "appointment_form"
+  ]
+}
+

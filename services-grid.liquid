@@ -1,0 +1,152 @@
+{{ 'custom-mrtournevis.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="services-grid section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title }}</h2>
+    {%- endif -%}
+    
+    <div class="grid-4">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'service' -%}
+            <div class="service-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- endif -%}
+              <h3>{{ block.settings.title }}</h3>
+              <div class="divider"></div>
+              <p>{{ block.settings.description }}</p>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Services Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre de section",
+      "default": "Nos services de réparation"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Couleur",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espacement"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding haut",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bas",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Service"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description du service"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Grid",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "title": "Smartphones",
+            "description": "Des écrans iPhone fissurés aux batteries Galaxy défectueuses, nos techniciens sont capables de résoudre presque tous les problèmes avec votre téléphone portable."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Tablettes",
+            "description": "Vous avez un écran cassé ou une prise casque défectueuse ? Quel que soit votre problème, nous pouvons vous aider, la plupart des travaux prennent moins d'une heure !"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Ordinateurs",
+            "description": "Que vous utilisiez un MacBook Pro, le dernier Dell XPS ou un ancien Lenovo qui a connu des jours meilleurs, nous pouvons vous remettre sur la bonne voie."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Console de jeux",
+            "description": "Votre console Nintendo Switch ne charge plus, l'écran n'affiche plus rien. Nous vous proposons un diagnostic gratuit afin d'évaluer la panne et nos techniciens effectuent la réparation dans les meilleurs délais et au meilleur prix garanti."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

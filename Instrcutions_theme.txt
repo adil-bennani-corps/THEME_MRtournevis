@@ -1,0 +1,632 @@
+# PROMPT CURSOR - Refonte Shopify Mr. Tournevis
+
+## 🎯 Contexte du Projet
+
+**Client :** Mr. Tournevis (shop.mrtournevis.be)  
+**Problème :** Le site Shopify actuel ne met pas en avant les services de réparation. Il apparaît comme une simple boutique d'accessoires alors que le client fait également de la réparation professionnelle (smartphones, tablettes, PC, consoles).
+
+**Site de référence pour les services :** https://www.mrtournevis.be/our-services (site Odoo principal)
+
+---
+
+## 🚨 Contraintes Importantes
+
+1. **NE JAMAIS afficher de prix pour les services de réparation**
+2. La prise de RDV est **uniquement pour les interventions à domicile**, pas pour les réparations en magasin
+3. Les produits (accessoires) doivent **garder leurs prix affichés**
+4. Les accessoires sont **originaux**, pas "premium" - adapter le wording
+5. Diagnostic gratuit en magasin doit être mis en avant
+
+---
+
+## 📋 Objectifs
+
+### Objectif Principal
+Rendre **immédiatement visible** dès la homepage que Mr. Tournevis propose :
+- ✅ Services de réparation professionnelle
+- ✅ Vente d'accessoires originaux
+
+### Objectifs Secondaires
+1. Créer une page `/pages/services` complète sur Shopify (inspirée du site Odoo)
+2. Moderniser le design (plus aéré, moderne, conversions optimisées)
+3. Simplifier la navigation
+
+---
+
+## 🏗️ Structure à Implémenter
+
+### 1️⃣ HOMEPAGE - Modifications
+
+#### A. Nouveau Hero Section
+```liquid
+<!-- Remplacer le hero actuel -->
+<section class="hero-dual">
+  <div class="hero-content">
+    <h1>Mr. Tournevis - Votre expert tech à Bruxelles</h1>
+    <p class="hero-subtitle">Réparation professionnelle & Accessoires originaux</p>
+    
+    <div class="hero-cta-group">
+      <a href="/pages/services" class="btn btn-primary">
+        <span class="icon">🔧</span> Nos services de réparation
+      </a>
+      <a href="/collections/all" class="btn btn-secondary">
+        <span class="icon">🛒</span> Voir la boutique
+      </a>
+    </div>
+  </div>
+  
+  <div class="hero-image">
+    <!-- Image existante ou nouvelle image split réparation/produits -->
+  </div>
+</section>
+```
+
+**Design specs :**
+- Layout 50/50 sur desktop, stack sur mobile
+- Typographie moderne (Inter ou Poppins)
+- CTAs bien visibles avec hover effects
+- Background subtle gradient ou image
+
+#### B. Nouvelle Section "Nos Activités" (après hero)
+```liquid
+<section class="services-products-split">
+  <h2>Réparation & Vente d'accessoires originaux</h2>
+  
+  <div class="activities-grid">
+    <!-- Card 1 : Services -->
+    <div class="activity-card">
+      <div class="card-icon">🔧</div>
+      <h3>Services de réparation</h3>
+      <ul class="services-list">
+        <li>Smartphones (iPhone, Samsung, Xiaomi...)</li>
+        <li>Tablettes & iPad</li>
+        <li>Ordinateurs (PC & Mac)</li>
+        <li>Consoles de jeux</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge">✓ Diagnostic gratuit</span>
+        <span class="badge">✓ Réparation rapide</span>
+      </div>
+      <a href="/pages/services" class="btn-link">En savoir plus →</a>
+    </div>
+    
+    <!-- Card 2 : Boutique -->
+    <div class="activity-card">
+      <div class="card-icon">🛒</div>
+      <h3>Boutique d'accessoires</h3>
+      <ul class="services-list">
+        <li>Accessoires d'origine</li>
+        <li>Coques & protections</li>
+        <li>Chargeurs & câbles</li>
+        <li>Audio & supports</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge">✓ Livraison gratuite dès 50€</span>
+        <span class="badge">✓ Produits garantis</span>
+      </div>
+      <a href="/collections/all" class="btn-link">Voir les produits →</a>
+    </div>
+  </div>
+</section>
+```
+
+**Design specs :**
+- 2 colonnes égales sur desktop
+- Cards avec légère élévation (box-shadow)
+- Hover effect smooth
+- Icons modernes (pas emoji en prod, utiliser SVG ou icon font)
+
+#### C. Conserver les sections produits existantes
+- Garder "Nouveautés"
+- Garder "Produits"
+- Ajuster l'espacement global
+
+---
+
+### 2️⃣ NAVIGATION - Header Modifié
+
+#### Structure actuelle :
+```
+Accueil | Apple | Samsung | Informatiques | Accessoires | Contact
+```
+
+#### Nouvelle structure :
+```liquid
+<nav class="main-nav">
+  <a href="/">Accueil</a>
+  <a href="/pages/services" class="nav-highlight">Services de réparation</a>
+  
+  <div class="dropdown">
+    <a href="/collections/all">Boutique</a>
+    <div class="dropdown-menu">
+      <a href="/collections/iphone">iPhone</a>
+      <a href="/collections/samsung">Samsung</a>
+      <a href="/collections/chargeurs">Informatique</a>
+      <a href="/collections/accessoires">Accessoires</a>
+      <a href="/collections/all">Tous les produits</a>
+    </div>
+  </div>
+  
+  <a href="/pages/appointment">Rendez-vous</a>
+  <a href="/pages/contact">Contact</a>
+</nav>
+```
+
+**Design specs :**
+- "Services de réparation" légèrement mis en avant (couleur accent ou badge "Nouveau")
+- Dropdown smooth au hover
+- Mobile : burger menu avec même structure
+
+---
+
+### 3️⃣ PAGE /pages/services (NOUVEAU)
+
+**Template complet à créer :**
+
+```liquid
+<!-- sections/services-page.liquid -->
+
+<!-- Hero Services -->
+<section class="services-hero">
+  <div class="container">
+    <h1>Réparation rapide et abordable de smartphones, tablettes, ordinateurs et consoles de jeux</h1>
+    <p class="lead">
+      Nous pouvons vous assurer que nous avons tout vu ! Des smartphones écrasés par une voiture 
+      aux tablettes qui ont plongé dans une piscine, nous sommes prêts à affronter tout ce qui se présente à nous.
+    </p>
+    <p>
+      Chez <strong>Mr. Tournevis</strong>, chaque technicien a une spécialité, et nous maintenons 
+      un environnement d'apprentissage constant, de sorte qu'aucun appareil n'est trop nouveau, 
+      aucune technologie trop compliquée.
+    </p>
+  </div>
+  <img src="[image smartphone cassé]" alt="Réparation smartphone" class="services-hero-image">
+</section>
+
+<!-- Services Grid -->
+<section class="services-grid">
+  <div class="container">
+    <div class="grid-4">
+      
+      <!-- Service 1 : Smartphones -->
+      <div class="service-card">
+        <img src="[icon/image smartphone]" alt="Réparation smartphone">
+        <h3>Smartphones</h3>
+        <div class="divider"></div>
+        <p>
+          Des écrans iPhone fissurés aux batteries Galaxy défectueuses, 
+          nos techniciens sont capables de résoudre presque tous les problèmes 
+          avec votre téléphone portable.
+        </p>
+      </div>
+      
+      <!-- Service 2 : Tablettes -->
+      <div class="service-card">
+        <img src="[icon/image tablette]" alt="Réparation tablette">
+        <h3>Tablettes</h3>
+        <div class="divider"></div>
+        <p>
+          Vous avez un écran cassé ou une prise casque défectueuse ? 
+          Quel que soit votre problème, nous pouvons vous aider, 
+          la plupart des travaux prennent moins d'une heure !
+        </p>
+      </div>
+      
+      <!-- Service 3 : Ordinateurs -->
+      <div class="service-card">
+        <img src="[icon/image ordinateur]" alt="Réparation ordinateur">
+        <h3>Ordinateurs</h3>
+        <div class="divider"></div>
+        <p>
+          Que vous utilisiez un MacBook Pro, le dernier Dell XPS ou un ancien 
+          Lenovo qui a connu des jours meilleurs, nous pouvons vous remettre 
+          sur la bonne voie.
+        </p>
+      </div>
+      
+      <!-- Service 4 : Consoles -->
+      <div class="service-card">
+        <img src="[icon/image console]" alt="Réparation console">
+        <h3>Console de jeux</h3>
+        <div class="divider"></div>
+        <p>
+          Votre console Nintendo Switch ne charge plus, l'écran n'affiche plus rien. 
+          Nous vous proposons un diagnostic gratuit afin d'évaluer la panne et nos 
+          techniciens effectuent la réparation dans les meilleurs délais et au meilleur prix garanti.
+        </p>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- CTA Rendez-vous -->
+<section class="cta-appointment">
+  <div class="container text-center">
+    <h2>Besoin d'une intervention à domicile ?</h2>
+    <a href="/pages/appointment" class="btn btn-primary btn-large">
+      Planifier un rendez-vous
+    </a>
+  </div>
+</section>
+
+<!-- Témoignages -->
+<section class="testimonials">
+  <div class="container">
+    <h2>Ce que disent nos clients</h2>
+    
+    <div class="testimonials-slider">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Je recommande vivement ce magasin. Service et personnels au top! 
+          Travail très bien et très professionnel à des prix abordables. 
+          Et sont extrêmement chaleureux avec la clientèle 👌🏻"
+        </p>
+        <div class="testimonial-author">
+          <img src="[avatar]" alt="Sam V.">
+          <strong>Sam V.</strong>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Milles mercis à toute l'équipe 🤝 super pro! Très très patient!! 
+          Moi qui est difficile ils m'ont tout de suite trouvé ce que je désirais. 
+          Super gentil hyper chaleureux et que ce soit en réparation ou achats 
+          je vais les yeux fermés 🙏"
+        </p>
+        <div class="testimonial-author">
+          <img src="[avatar]" alt="Kamelia A.">
+          <strong>Kamelia A.</strong>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Je recommande ce magasin les yeux fermés! J'ai appelé à 18h00 pour 
+          une réparation de mon écran iPhone 11 complètement cassé. Prise en charge 
+          rapide et réparation en moins de 30 minutes! Vous recevez même une protection 
+          et une garantie sur votre écran. Une adresse à retenir à Bruxelles ! :)"
+        </p>
+        <div class="testimonial-author">
+          <img src="[avatar]" alt="Sana K.">
+          <strong>Sana K.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Adresses magasins -->
+<section class="locations">
+  <div class="container">
+    <h2>Nos magasins</h2>
+    
+    <div class="locations-grid">
+      <!-- Magasin 1 -->
+      <div class="location-card">
+        <h3>Bruxelles - Forest</h3>
+        <p class="address">
+          Rue de Formanoir 8<br>
+          1070 Bruxelles<br>
+          Belgique
+        </p>
+        <p class="contact">
+          <strong>Tel:</strong> <a href="tel:+3248369428">+32 (483)69.43.28</a><br>
+          <strong>Email:</strong> <a href="mailto:info@mrtournevis.be">info@mrtournevis.be</a>
+        </p>
+      </div>
+      
+      <!-- Magasin 2 -->
+      <div class="location-card">
+        <h3>Anderlecht</h3>
+        <p class="address">
+          Rue Scheutveld 44<br>
+          1070 Anderlecht<br>
+          Belgique
+        </p>
+        <p class="contact">
+          <strong>Tel:</strong> <a href="tel:+3248369428">+32 (483)69.43.28</a><br>
+          <strong>Email:</strong> <a href="mailto:info@mrtournevis.be">info@mrtournevis.be</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 4️⃣ PAGE /pages/appointment (si pas existante)
+
+```liquid
+<section class="appointment-page">
+  <div class="container">
+    <h1>Prendre rendez-vous</h1>
+    <p class="lead">
+      Vous avez besoin d'une intervention à domicile ? 
+      Remplissez le formulaire ci-dessous et nous vous recontacterons rapidement.
+    </p>
+    
+    <!-- Option 1 : Formulaire Shopify natif -->
+    <!-- Option 2 : Intégration Calendly -->
+    <!-- Option 3 : Formulaire custom avec webhook -->
+    
+    <form class="appointment-form">
+      <div class="form-group">
+        <label>Nom complet *</label>
+        <input type="text" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Téléphone *</label>
+        <input type="tel" name="phone" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Type d'intervention *</label>
+        <select name="service_type" required>
+          <option value="">Sélectionnez...</option>
+          <option value="smartphone">Smartphone</option>
+          <option value="tablette">Tablette</option>
+          <option value="ordinateur">Ordinateur</option>
+          <option value="console">Console de jeux</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Description du problème *</label>
+        <textarea name="message" rows="5" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>Date souhaitée</label>
+        <input type="date" name="preferred_date">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+    </form>
+  </div>
+</section>
+```
+
+---
+
+## 🎨 Design System
+
+### Palette de couleurs
+```css
+:root {
+  --color-primary: #DC2626; /* Rouge actuel à garder */
+  --color-secondary: #1F2937;
+  --color-accent: #F59E0B;
+  --color-text: #111827;
+  --color-text-light: #6B7280;
+  --color-bg: #FFFFFF;
+  --color-bg-light: #F9FAFB;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+```
+
+### Typographie
+```css
+/* Utiliser les Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; }
+h2 { font-size: 2rem; font-weight: 600; line-height: 1.3; }
+h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.4; }
+```
+
+### Espacements
+```css
+.section { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section { padding: 40px 0; }
+}
+```
+
+### Composants réutilisables
+
+**Boutons :**
+```css
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #B91C1C;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-large {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+```
+
+**Cards :**
+```css
+.activity-card,
+.service-card,
+.testimonial-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover,
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+```
+
+---
+
+## ✅ Checklist de Validation
+
+### Homepage
+- [ ] Hero section affiche clairement les 2 activités (réparation + boutique)
+- [ ] 2 CTAs visibles : "Services" et "Boutique"
+- [ ] Nouvelle section "Nos Activités" après le hero
+- [ ] Sections produits conservées en dessous
+- [ ] Responsive mobile parfait
+
+### Navigation
+- [ ] Menu "Services de réparation" visible
+- [ ] Dropdown "Boutique" fonctionnel
+- [ ] Lien "Rendez-vous" présent
+- [ ] Mobile burger menu OK
+
+### Page Services
+- [ ] Hero avec texte exact du site Odoo
+- [ ] 4 services en grid (Smartphones, Tablettes, PC, Consoles)
+- [ ] AUCUN PRIX affiché
+- [ ] CTA "Planifier rendez-vous" clair
+- [ ] Section témoignages avec slider
+- [ ] 2 adresses magasins affichées
+- [ ] Images optimisées (WebP)
+
+### Page Appointment
+- [ ] Formulaire fonctionnel
+- [ ] Champs requis marqués
+- [ ] Validation côté client
+- [ ] Message de confirmation après envoi
+
+### Design
+- [ ] Cohérence visuelle avec l'identité actuelle
+- [ ] Typographie moderne (Inter)
+- [ ] Espacements aérés
+- [ ] Hover effects smooth
+- [ ] Responsive tablette et mobile
+- [ ] Performance (images optimisées, CSS minifié)
+
+### SEO
+- [ ] Balises H1, H2, H3 correctes
+- [ ] Meta description page Services
+- [ ] Alt text sur toutes les images
+- [ ] Schema markup pour LocalBusiness (optionnel)
+
+---
+
+## 📦 Fichiers à Créer/Modifier
+
+### Nouveaux fichiers
+```
+/sections/services-hero.liquid
+/sections/services-grid.liquid
+/sections/services-testimonials.liquid
+/sections/services-locations.liquid
+/sections/homepage-activities.liquid
+/templates/page.services.liquid (ou page.services.json pour OS 2.0)
+/templates/page.appointment.liquid
+```
+
+### Fichiers à modifier
+```
+/sections/header.liquid (navigation)
+/sections/hero.liquid (homepage hero)
+/templates/index.liquid ou index.json (homepage)
+/assets/theme.css ou custom.css (styles)
+```
+
+### Assets à ajouter
+```
+/assets/services-smartphone.jpg
+/assets/services-tablette.jpg
+/assets/services-pc.jpg
+/assets/services-console.jpg
+/assets/testimonial-avatar-1.jpg
+/assets/testimonial-avatar-2.jpg
+/assets/testimonial-avatar-3.jpg
+```
+
+---
+
+## 🚀 Instructions d'Exécution pour Cursor
+
+1. **Commence par analyser le thème actuel** :
+   - Identifie quel thème Shopify est utilisé (Dawn, Debut, custom?)
+   - Localise les fichiers principaux (layout, sections, templates)
+
+2. **Crée d'abord la structure de la page Services** :
+   - Template page
+   - Sections individuelles
+   - CSS associé
+
+3. **Modifie ensuite la homepage** :
+   - Nouveau hero
+   - Section "Nos Activités"
+   - Ajustements espacement
+
+4. **Adapte la navigation** :
+   - Header
+   - Mobile menu
+
+5. **Crée la page Appointment**
+
+6. **Teste et optimise** :
+   - Responsive
+   - Performance
+   - Accessibilité
+
+---
+
+## 💡 Best Practices Shopify
+
+- Utiliser les sections Shopify 2.0 si le thème le supporte
+- Créer des schema JSON pour rendre les sections éditables depuis le customizer
+- Lazy load des images
+- Utiliser `{% render %}` pour les snippets
+- Préfixer les classes CSS custom pour éviter les conflits
+- Tester sur mobile d'abord (mobile-first)
+
+---

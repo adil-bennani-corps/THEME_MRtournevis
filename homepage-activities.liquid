@@ -1,0 +1,181 @@
+{{ 'custom-mrtournevis.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="homepage-activities section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title }}</h2>
+    {%- endif -%}
+    
+    <div class="activities-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'activity' -%}
+            <div class="activity-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <div class="card-icon">{{ block.settings.icon }}</div>
+              {%- endif -%}
+              <h3>{{ block.settings.title }}</h3>
+              
+              {%- if block.settings.services_list != blank -%}
+                <ul class="services-list">
+                  {%- assign services = block.settings.services_list | split: ',' -%}
+                  {%- for service in services -%}
+                    <li>{{ service | strip }}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              
+              {%- if block.settings.badges != blank -%}
+                <div class="card-badges">
+                  {%- assign badges = block.settings.badges | split: ',' -%}
+                  {%- for badge in badges -%}
+                    <span class="badge">{{ badge | strip }}</span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              
+              {%- if block.settings.link_label != blank and block.settings.link_url != blank -%}
+                <a href="{{ block.settings.link_url }}" class="btn-link">
+                  {{ block.settings.link_label }} →
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage Activities",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre de section",
+      "default": "Réparation & Vente d'accessoires originaux"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Couleur",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espacement"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding haut",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bas",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "activity",
+      "name": "Activité",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icône (emoji ou texte)",
+          "default": "🔧"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Services de réparation"
+        },
+        {
+          "type": "textarea",
+          "id": "services_list",
+          "label": "Liste des services (séparés par des virgules)",
+          "default": "Smartphones (iPhone, Samsung, Xiaomi...), Tablettes & iPad, Ordinateurs (PC & Mac), Consoles de jeux"
+        },
+        {
+          "type": "textarea",
+          "id": "badges",
+          "label": "Badges (séparés par des virgules)",
+          "default": "✓ Diagnostic gratuit, ✓ Réparation rapide"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texte du lien",
+          "default": "En savoir plus"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "URL du lien",
+          "default": "/pages/services"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Activities",
+      "blocks": [
+        {
+          "type": "activity",
+          "settings": {
+            "icon": "🔧",
+            "title": "Services de réparation",
+            "services_list": "Smartphones (iPhone, Samsung, Xiaomi...), Tablettes & iPad, Ordinateurs (PC & Mac), Consoles de jeux",
+            "badges": "✓ Diagnostic gratuit, ✓ Réparation rapide",
+            "link_label": "En savoir plus",
+            "link_url": "/pages/services"
+          }
+        },
+        {
+          "type": "activity",
+          "settings": {
+            "icon": "🛒",
+            "title": "Boutique d'accessoires",
+            "services_list": "Accessoires d'origine, Coques & protections, Chargeurs & câbles, Audio & supports",
+            "badges": "✓ Livraison gratuite dès 50€, ✓ Produits garantis",
+            "link_label": "Voir les produits",
+            "link_url": "/collections/all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
